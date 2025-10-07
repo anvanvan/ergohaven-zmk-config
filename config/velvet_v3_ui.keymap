@@ -81,7 +81,7 @@
 
         sd-sz {
             bindings = <&kp LA(S)>;
-            key-positions = <14 15>;
+            key-positions = <3>;
         };
     };
 
