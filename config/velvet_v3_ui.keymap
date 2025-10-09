@@ -118,10 +118,10 @@
 
         nav {
             bindings = <
-&trans  &kp N1  &kp N2    &kp N3   &kp N4   &kp N5                     &kp N6    &kp N7         &kp N8       &kp N9     &kp N0  &trans
-&trans  &trans  &trans    &trans   &trans   &kp RET                    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &trans  &trans
-&trans  &trans  &kp HOME  &kp INS  &kp END  &kp DEL                    &kp HOME  &kp PAGE_DOWN  &kp PAGE_UP  &kp END    &trans  &kp CAPSLOCK
-                &trans    &trans   &trans   &trans   &trans    &trans  &mo 3     &trans         &trans       &trans
+&trans  &kp N1              &kp N2        &kp N3   &kp N4         &kp N5                                 &kp N6    &kp N7         &kp N8       &kp N9     &kp N0  &trans
+&trans  &kp LC(LEFT_ARROW)  &kp LA(LEFT)  &trans   &kp LA(RIGHT)  &kp LC(RIGHT_ARROW)                    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &trans  &trans
+&trans  &trans              &kp HOME      &kp INS  &kp END        &kp DEL                                &kp HOME  &kp PAGE_DOWN  &kp PAGE_UP  &kp END    &trans  &kp CAPSLOCK
+                            &trans        &trans   &trans         &trans               &trans    &trans  &mo 3     &trans         &trans       &trans
             >;
 
             display-name = "Navigation";
