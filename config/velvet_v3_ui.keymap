@@ -83,6 +83,11 @@
             bindings = <&kp LA(S)>;
             key-positions = <3 4>;
         };
+
+        df-click {
+            bindings = <&mkp MB1>;
+            key-positions = <15 16>;
+        };
     };
 
     macros {
