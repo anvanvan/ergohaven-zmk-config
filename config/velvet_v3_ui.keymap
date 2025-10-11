@@ -132,10 +132,10 @@
 
         nav {
             bindings = <
-&trans        &kp KP_MULTIPLY  &kp N7  &kp N8  &kp N9  &kp KP_PLUS                     &kp HOME          &kp PAGE_DOWN         &kp PAGE_UP            &kp END            &trans     &trans
-&trans        &kp KP_DIVIDE    &kp N4  &kp N5  &kp N6  &kp KP_MINUS                    &kp LEFT          &kp DOWN              &kp UP                 &kp RIGHT          &trans     &trans
-&kp CAPSLOCK  &kp N0           &kp N1  &kp N2  &kp N3  &trans                          &kp LG(LA(LEFT))  &kp LG(LS(LA(LEFT)))  &kp LG(LA(LS(RIGHT)))  &kp LG(LA(RIGHT))  &kp LA(F)  &trans
-                               &trans  &trans  &trans  &trans        &trans    &trans  &mo 3             &trans                &trans                 &trans
+&trans        &trans  &trans  &trans  &trans  &trans                    &kp HOME          &kp PAGE_DOWN         &kp PAGE_UP            &kp END            &trans     &trans
+&trans        &trans  &trans  &trans  &trans  &trans                    &kp LEFT          &kp DOWN              &kp UP                 &kp RIGHT          &trans     &trans
+&kp CAPSLOCK  &trans  &trans  &trans  &trans  &trans                    &kp LG(LA(LEFT))  &kp LG(LS(LA(LEFT)))  &kp LG(LA(LS(RIGHT)))  &kp LG(LA(RIGHT))  &kp LA(F)  &trans
+                      &trans  &trans  &trans  &trans  &trans    &trans  &mo 3             &trans                &trans                 &trans
             >;
 
             display-name = "Navigation";
@@ -143,10 +143,10 @@
 
         sym {
             bindings = <
-&trans  &kp EXCL  &kp AT      &kp POUND  &kp DOLLAR  &kp PERCENT                    &kp CARET  &kp AMPERSAND  &kp ASTRK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp EQUAL
-&trans  &kp BSLH  &kp LPAR    &kp MINUS  &kp RPAR    &kp PLUS                       &kp PRCNT  &kp LBRC       &kp SEMI   &kp RBRC              &kp EXCL               &kp PLUS
-&trans  &trans    &kp STAR    &kp COLON  &kp FSLH    &kp DLLR                       &kp AT     &kp PIPE       &kp TILDE  &kp AMPS              &trans                 &trans
-                  &codeblock  &trans     &trans      &mo 3        &trans    &trans  &trans     &trans         &trans     &trans
+&trans  &kp KP_MULTIPLY  &kp N7      &kp N8  &kp N9  &kp KP_PLUS                     &kp EXCL   &kp AT    &kp HASH   &kp DOLLAR            &kp PERCENT            &kp EQUAL
+&trans  &kp KP_DIVIDE    &kp N4      &kp N5  &kp N6  &kp KP_MINUS                    &kp CARET  &kp AMPS  &kp ASTRK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp PLUS
+&trans  &kp N0           &kp N1      &kp N2  &kp N3  &kp KP_EQUAL                    &trans     &trans    &trans     &trans                &trans                 &trans
+                         &codeblock  &trans  &trans  &mo 3         &trans    &trans  &trans     &trans    &trans     &trans
             >;
 
             display-name = "Symbols";
