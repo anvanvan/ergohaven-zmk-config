@@ -106,7 +106,7 @@
             bindings =
                 <&kp GRAVE &kp GRAVE &kp GRAVE>,
                 <&macro_wait_time 10>,
-                <&kp RET &kp RET>,
+                <&kp LS(RET) &kp LS(RET)>,
                 <&macro_wait_time 10>,
                 <&kp GRAVE &kp GRAVE &kp GRAVE>,
                 <&macro_wait_time 10>,
