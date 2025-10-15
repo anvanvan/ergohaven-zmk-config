@@ -250,7 +250,7 @@
 &trackball { cpi = <2200>; };
 
 &trackball_listener {
-    input-processors = <&zip_temp_layer 4 500>, <&zip_xy_scaler 9 22>;
+    input-processors = <&zip_xy_scaler 9 22>;
 
     scroller {
         layers = <5>;
