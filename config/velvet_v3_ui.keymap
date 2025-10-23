@@ -133,62 +133,6 @@
 
             label = "FULLSCREEN";
         };
-
-        left_half: left_half {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_press>,
-                <&kp C_AC_NEXT_KEYBOARD_LAYOUT_SELECT>,
-                <&macro_tap>,
-                <&kp LC(LEFT_ARROW)>,
-                <&macro_release>,
-                <&kp GLOBE>;
-
-            label = "LEFT_HALF";
-        };
-
-        right_half: right_half {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_press>,
-                <&kp C_AC_NEXT_KEYBOARD_LAYOUT_SELECT>,
-                <&macro_tap>,
-                <&kp LC(RIGHT)>,
-                <&macro_release>,
-                <&kp GLOBE>;
-
-            label = "RIGHT_HALF";
-        };
-
-        left_right_split: left_right_split {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_press>,
-                <&kp C_AC_NEXT_KEYBOARD_LAYOUT_SELECT>,
-                <&macro_tap>,
-                <&kp LC(LS(LEFT))>,
-                <&macro_release>,
-                <&kp GLOBE>;
-
-            label = "LEFT_RIGHT_SPLIT";
-        };
-
-        right_left_split: right_left_split {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_press>,
-                <&kp C_AC_NEXT_KEYBOARD_LAYOUT_SELECT>,
-                <&macro_tap>,
-                <&kp LC(LS(RIGHT))>,
-                <&macro_release>,
-                <&kp GLOBE>;
-
-            label = "RIGHT_LEFT_SPLIT";
-        };
     };
 
     keymap {
@@ -207,10 +151,10 @@
 
         nav {
             bindings = <
-&trans        &trans  &trans  &trans  &trans  &trans                    &kp HOME    &kp PAGE_DOWN      &kp PAGE_UP        &kp END      &trans       &trans
-&trans        &trans  &trans  &trans  &trans  &trans                    &kp LEFT    &kp DOWN           &kp UP             &kp RIGHT    &trans       &trans
-&kp CAPSLOCK  &trans  &trans  &trans  &trans  &trans                    &left_half  &left_right_split  &right_left_split  &right_half  &fullscreen  &trans
-                      &trans  &trans  &trans  &trans  &trans    &trans  &mo 3       &trans             &trans             &trans
+&trans        &trans  &trans  &trans  &trans  &trans                    &kp HOME          &kp PAGE_DOWN         &kp PAGE_UP            &kp END                  &trans       &trans
+&trans        &trans  &trans  &trans  &trans  &trans                    &kp LEFT          &kp DOWN              &kp UP                 &kp RIGHT                &trans       &trans
+&kp CAPSLOCK  &trans  &trans  &trans  &trans  &trans                    &kp LG(LA(LEFT))  &kp LG(LA(LC(LEFT)))  &kp LG(LA(LC(RIGHT)))  &kp LG(LA(RIGHT_ARROW))  &fullscreen  &trans
+                      &trans  &trans  &trans  &trans  &trans    &trans  &mo 3             &trans                &trans                 &trans
             >;
 
             display-name = "Navigation";
