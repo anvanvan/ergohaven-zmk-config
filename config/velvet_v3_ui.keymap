@@ -184,9 +184,9 @@
 
         mouse {
             bindings = <
-&trans  &trans  &trans    &trans    &trans    &trans                    &trans  &trans    &trans    &trans  &trans  &trans
-&trans  &mo 6   &mkp MB3  &mkp MB2  &mkp MB1  &mo 5                     &trans  &mkp MB1  &mkp MB2  &mo 5   &trans  &trans
-&trans  &trans  &trans    &trans    &trans    &trans                    &trans  &trans    &trans    &trans  &trans  &trans
+&trans  &trans  &trans    &trans    &trans    &trans                    &trans  &trans    &trans    &trans    &trans  &trans
+&trans  &mo 5   &mkp MB3  &mkp MB2  &mkp MB1  &trans                    &trans  &mkp MB1  &mkp MB2  &mkp MB3  &mo 5   &trans
+&trans  &trans  &trans    &trans    &trans    &trans                    &trans  &trans    &trans    &trans    &trans  &trans
                 &trans    &trans    &trans    &trans  &trans    &trans  &trans  &trans    &trans    &trans
             >;
 
