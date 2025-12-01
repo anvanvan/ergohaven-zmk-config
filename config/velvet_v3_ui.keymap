@@ -65,9 +65,7 @@
             mods = <(MOD_LSFT)>;
         };
 
-        /omit-if-no-ref/
-
-        zip_temp_layer: zip_temp_layer {
+        zip_auto_mouse: zip_auto_mouse {
             compatible = "zmk,input-processor-temp-layer";
             #input-processor-cells = <2>;
             require-prior-idle-ms = <800>;
@@ -159,7 +157,7 @@
                       &trans  &trans  &trans  &trans  &trans    &trans  &mo 3             &trans                &trans                 &trans
             >;
 
-            display-name = "Navigation";
+            display-name = "Nav";
         };
 
         sym {
@@ -266,7 +264,7 @@
 &trackball { cpi = <1000>; };
 
 &trackball_listener {
-    input-processors = <&zip_temp_layer 4 500>, <&zip_xy_scaler 9 20>;
+    input-processors = <&zip_auto_mouse 4 500>, <&zip_xy_scaler 9 20>;
 
     scroller {
         layers = <5>;
