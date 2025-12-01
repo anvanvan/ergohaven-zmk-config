@@ -65,6 +65,20 @@
             mods = <(MOD_LSFT)>;
         };
 
+        hmr_mouse: hmr_mouse {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HMR_MOUSE";
+            bindings = <&kp>, <&mkp>;
+
+            #binding-cells = <2>;
+            flavor = "balanced";
+            require-prior-idle-ms = <125>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            hold-trigger-on-release;
+            hold-trigger-key-positions = <16 15 13 0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 42 43>;
+        };
+
         zip_auto_mouse: zip_auto_mouse {
             compatible = "zmk,input-processor-temp-layer";
             #input-processor-cells = <2>;
@@ -174,10 +188,10 @@
 
         mouse {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans    &trans    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &mkp MB2  &mkp MB3  &mo 5   &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans    &trans    &trans  &trans
-                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans                    &trans                    &trans                &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &hmr_mouse RIGHT_GUI MB1  &hmr_mouse RIGHT_ALT MB2  &hmr_mouse RCTRL MB3  &mo 5   &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans                    &trans                    &trans                &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans                    &trans                    &trans
             >;
 
             display-name = "Mouse";
