@@ -65,20 +65,6 @@
             mods = <(MOD_LSFT)>;
         };
 
-        hmr_mouse: hmr_mouse {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HMR_MOUSE";
-            bindings = <&kp>, <&mkp>;
-
-            #binding-cells = <2>;
-            flavor = "balanced";
-            require-prior-idle-ms = <125>;
-            tapping-term-ms = <280>;
-            quick-tap-ms = <175>;
-            hold-trigger-on-release;
-            hold-trigger-key-positions = <16 15 13 0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 42 43>;
-        };
-
         zip_auto_mouse: zip_auto_mouse {
             compatible = "zmk,input-processor-temp-layer";
             #input-processor-cells = <2>;
@@ -147,7 +133,7 @@
 &kp TAB        &kp Q              &kp W         &kp E            &kp R            &kp T                                         &kp Y                         &kp U             &kp I             &kp O         &kp P                  &shift_delete
 &mt LCTRL ESC  &hml LEFT_SHIFT A  &hml LCTRL S  &hml LEFT_ALT D  &hml LEFT_GUI F  &hml LC(LA(LS(LEFT_GUI))) G                   &hmr RC(RA(RS(RIGHT_GUI))) H  &hmr RIGHT_GUI J  &hmr RIGHT_ALT K  &hmr RCTRL L  &hmr RIGHT_SHIFT SEMI  &kp SQT
 &kp GLOBE      &kp Z              &kp X         &kp C            &kp V            &kp B                                         &kp N                         &kp M             &kp COMMA         &kp DOT       &kp SLASH              &kp MINUS
-                                  &kp GRAVE     &kp BACKSLASH    &lt 5 SPACE      &mo 1                        &mo 1    &tog 5  &mo 2                         &none             &kp LBKT          &kp RBKT
+                                  &kp GRAVE     &kp BACKSLASH    &lt 5 SPACE      &mo 1                        &mo 1    &tog 5  &mo 2                         &cap_sen 4 MB1    &kp LBKT          &kp RBKT
             >;
 
             display-name = "Base";
