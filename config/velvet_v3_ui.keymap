@@ -135,10 +135,10 @@
 
         base {
             bindings = <
-&kp TAB        &kp Q              &kp W         &kp E            &kp R            &kp T                                                           &kp Y                         &kp U             &kp I             &kp O         &kp P                  &shift_delete
-&mt LCTRL ESC  &hml LEFT_SHIFT A  &hml LCTRL S  &hml LEFT_ALT D  &hml LEFT_GUI F  &hml LC(LA(LS(LEFT_GUI))) G                                     &hmr RC(RA(RS(RIGHT_GUI))) H  &hmr RIGHT_GUI J  &hmr RIGHT_ALT K  &hmr RCTRL L  &hmr RIGHT_SHIFT SEMI  &kp SQT
-&kp GLOBE      &kp Z              &kp X         &kp C            &kp V            &kp B                                                           &kp N                         &kp M             &kp COMMA         &kp DOT       &kp SLASH              &kp MINUS
-                                  &mkp MB2      &mkp MB1         &lt 5 SPACE      &lt 1 GRAVE                  &kp BACKSLASH    &kp LEFT_BRACKET  &lt 2 RIGHT_BRACKET           &none             &mkp MB1          &mkp MB2
+&kp TAB        &kp Q              &kp W         &kp E            &kp R            &kp T                                                       &kp Y                         &kp U             &kp I             &kp O         &kp P                  &shift_delete
+&mt LCTRL ESC  &hml LEFT_SHIFT A  &hml LCTRL S  &hml LEFT_ALT D  &hml LEFT_GUI F  &hml LC(LA(LS(LEFT_GUI))) G                                 &hmr RC(RA(RS(RIGHT_GUI))) H  &hmr RIGHT_GUI J  &hmr RIGHT_ALT K  &hmr RCTRL L  &hmr RIGHT_SHIFT SEMI  &kp SQT
+&kp GLOBE      &kp Z              &kp X         &kp C            &kp V            &kp B                                                       &kp N                         &kp M             &kp COMMA         &kp DOT       &kp SLASH              &kp MINUS
+                                  &mkp MB2      &mkp MB1         &lt 5 SPACE      &lt 1 BACKSLASH              &kp GRAVE    &kp LEFT_BRACKET  &lt 2 RIGHT_BRACKET           &none             &mkp MB1          &mkp MB2
             >;
 
             display-name = "Base";
@@ -146,10 +146,10 @@
 
         nav {
             bindings = <
-&trans        &trans  &trans  &trans  &trans  &trans                    &kp HOME          &kp PAGE_DOWN         &kp PAGE_UP            &kp END                  &trans       &trans
-&trans        &trans  &trans  &trans  &trans  &trans                    &kp LEFT          &kp DOWN              &kp UP                 &kp RIGHT                &trans       &trans
-&kp CAPSLOCK  &trans  &trans  &trans  &trans  &trans                    &kp LG(LA(LEFT))  &kp LG(LA(LC(LEFT)))  &kp LG(LA(LC(RIGHT)))  &kp LG(LA(RIGHT_ARROW))  &fullscreen  &trans
-                      &trans  &trans  &trans  &trans  &trans    &trans  &mo 3             &trans                &trans                 &trans
+&trans  &trans      &trans  &trans  &trans  &trans                    &kp HOME          &kp PAGE_DOWN         &kp PAGE_UP            &kp END                  &trans  &trans
+&trans  &caps_word  &trans  &trans  &trans  &trans                    &kp LEFT          &kp DOWN              &kp UP                 &kp RIGHT                &trans  &trans
+&trans  &trans      &trans  &trans  &trans  &trans                    &kp LG(LA(LEFT))  &kp LG(LA(LC(LEFT)))  &kp LG(LA(LC(RIGHT)))  &kp LG(LA(RIGHT_ARROW))  &trans  &trans
+                    &trans  &trans  &trans  &trans  &trans    &trans  &mo 3             &trans                &trans                 &trans
             >;
 
             display-name = "Nav";
@@ -157,10 +157,10 @@
 
         sym {
             bindings = <
-&trans  &kp KP_MULTIPLY  &kp N7      &kp N8  &kp N9  &kp KP_PLUS                    &kp EXCL   &kp AT    &kp HASH   &kp DOLLAR            &kp PERCENT            &kp EQUAL
-&trans  &kp KP_DIVIDE    &kp N4      &kp N5  &kp N6  &kp KP_MINUS                   &kp CARET  &kp AMPS  &kp ASTRK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &trans
-&trans  &kp N0           &kp N1      &kp N2  &kp N3  &kp KP_EQUAL                   &trans     &trans    &trans     &trans                &trans                 &trans
-                         &codeblock  &trans  &trans  &mo 3         &none    &trans  &trans     &trans    &trans     &trans
+&trans  &kp KP_MULTIPLY  &kp N7  &kp N8  &kp N9  &kp KP_PLUS                         &kp EXCL   &kp AT    &kp HASH   &kp DOLLAR            &kp PERCENT            &kp EQUAL
+&trans  &kp KP_DIVIDE    &kp N4  &kp N5  &kp N6  &kp KP_MINUS                        &kp CARET  &kp AMPS  &kp ASTRK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &trans
+&trans  &kp N0           &kp N1  &kp N2  &kp N3  &kp KP_EQUAL                        &trans     &trans    &trans     &trans                &trans                 &trans
+                         &trans  &trans  &trans  &mo 3         &codeblock    &trans  &trans     &trans    &trans     &trans
             >;
 
             display-name = "Symbols";
