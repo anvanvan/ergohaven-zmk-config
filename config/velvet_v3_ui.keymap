@@ -165,7 +165,7 @@
 &trans      &kp KP_EQUAL   &kp N1        &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_0                       &kp EXCL   &kp AT    &kp HASH   &kp DOLLAR            &kp PERCENT            &kp EQUAL
 &trans      &kp KP_MINUS   &kp N4        &kp N5        &kp N6        &kp KP_PLUS                        &kp CARET  &kp AMPS  &kp ASTRK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &trans
 &codeblock  &kp KP_DIVIDE  &kp NUMBER_7  &kp N8        &kp NUMBER_9  &kp KP_MULTIPLY                    &trans     &trans    &trans     &trans                &trans                 &trans
-                           &trans        &trans        &trans        &mo 3            &trans    &trans  &trans     &trans    &trans     &trans
+                           &kp COMMA     &kp PERIOD    &trans        &mo 3            &trans    &trans  &trans     &trans    &trans     &trans
             >;
 
             display-name = "Symbols";
