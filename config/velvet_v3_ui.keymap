@@ -151,10 +151,10 @@
 
         nav {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp HOME          &kp PAGE_DOWN    &kp PAGE_UP           &kp END                  &trans      &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp LEFT          &kp DOWN         &kp UP                &kp RIGHT                &caps_word  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp LG(LA(LEFT))  &kp LS(LC(TAB))  &kp LC(TAB)           &kp LG(LA(RIGHT_ARROW))  &trans      &trans
-                &trans  &trans  &trans  &trans  &trans    &trans  &mo 3             &trans           &kp LA(LC(LG(LEFT)))  &kp RA(RC(RG(RIGHT)))
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp HOME              &kp PAGE_DOWN  &kp PAGE_UP           &kp END                &trans      &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp LEFT              &kp DOWN       &kp UP                &kp RIGHT              &caps_word  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &kp LG(LEFT_BRACKET)  &kp LC(TAB)    &kp LC(LS(TAB))       &kp LG(RIGHT_BRACKET)  &trans      &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &mo 3                 &trans         &kp LA(LC(LG(LEFT)))  &kp RA(RC(RG(RIGHT)))
             >;
 
             display-name = "Nav";
