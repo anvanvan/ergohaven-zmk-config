@@ -82,12 +82,12 @@
         };
 
         ui-umlaut {
-            bindings = <&kp LA(U)>;
+            bindings = <&kp RA(U)>;
             key-positions = <7 8>;
         };
 
         sd-sz {
-            bindings = <&kp LA(S)>;
+            bindings = <&kp RA(S)>;
             key-positions = <3 4>;
             require-prior-idle-ms = <100>;
             timeout-ms = <30>;
