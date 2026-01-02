@@ -86,7 +86,7 @@
             key-positions = <7 8>;
         };
 
-        sd-sz {
+        er-sz {
             bindings = <&kp RA(S)>;
             key-positions = <3 4>;
             require-prior-idle-ms = <100>;
