@@ -71,6 +71,39 @@
             require-prior-idle-ms = <800>;
             excluded-positions = <>;
         };
+
+        umlaut_a: umlaut_a {
+            compatible = "zmk,behavior-mod-morph";
+            label = "UMLAUT_A";
+            #binding-cells = <0>;
+            bindings = <&umlaut_a_lower>, <&umlaut_a_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        umlaut_u: umlaut_u {
+            compatible = "zmk,behavior-mod-morph";
+            label = "UMLAUT_U";
+            #binding-cells = <0>;
+            bindings = <&umlaut_u_lower>, <&umlaut_u_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        umlaut_o: umlaut_o {
+            compatible = "zmk,behavior-mod-morph";
+            label = "UMLAUT_O";
+            #binding-cells = <0>;
+            bindings = <&umlaut_o_lower>, <&umlaut_o_upper>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        ht_umlaut_a: ht_umlaut_a {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HT_UMLAUT_A";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&umlaut_a>;
+            tapping-term-ms = <280>;
+            flavor = "balanced";
+        };
     };
 
     combos {
@@ -124,6 +157,48 @@
 
             label = "CODEBLOCK";
         };
+
+        umlaut_a_lower: umlaut_a_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(U)>, <&kp A>;
+            label = "UMLAUT_A_LOWER";
+        };
+
+        umlaut_a_upper: umlaut_a_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(U)>, <&kp LS(A)>;
+            label = "UMLAUT_A_UPPER";
+        };
+
+        umlaut_u_lower: umlaut_u_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(U)>, <&kp U>;
+            label = "UMLAUT_U_LOWER";
+        };
+
+        umlaut_u_upper: umlaut_u_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(U)>, <&kp LS(U)>;
+            label = "UMLAUT_U_UPPER";
+        };
+
+        umlaut_o_lower: umlaut_o_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(U)>, <&kp O>;
+            label = "UMLAUT_O_LOWER";
+        };
+
+        umlaut_o_upper: umlaut_o_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(U)>, <&kp LS(O)>;
+            label = "UMLAUT_O_UPPER";
+        };
     };
 
     keymap {
@@ -142,8 +217,8 @@
 
         nav {
             bindings = <
-&trans  &trans  &trans            &trans               &trans                &trans                    &kp HOME  &kp PAGE_DOWN          &kp PAGE_UP        &kp END          &trans  &trans
-&trans  &trans  &hml LCTRL RA(S)  &hml LEFT_ALT MINUS  &hml LEFT_GUI EQUAL   &trans                    &kp LEFT  &kp DOWN               &kp UP             &kp RIGHT        &trans  &trans
+&trans  &trans  &trans            &trans               &trans                &trans                    &trans    &umlaut_u              &trans             &umlaut_o        &trans  &trans
+&trans  &ht_umlaut_a LEFT_SHIFT 0  &hml LCTRL RA(S)  &hml LEFT_ALT MINUS  &hml LEFT_GUI EQUAL   &trans                    &kp LEFT  &kp DOWN               &kp UP             &kp RIGHT        &trans  &trans
 &trans  &trans  &kp LEFT_BRACE    &kp LEFT_BRACKET     &kp LEFT_PARENTHESIS  &trans                    &trans    &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RIGHT_BRACE  &trans  &trans
                 &trans            &trans               &trans                &trans  &trans    &trans  &mo 3     &trans                 &trans             &trans
             >;
