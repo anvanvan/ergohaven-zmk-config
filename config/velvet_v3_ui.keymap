@@ -328,13 +328,12 @@
         layers = <5>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,   // natural scroll (invert Y)
-            <&zip_xy_scaler 1 4>,                           // scroll speed = 1/4 * cpi (per ergohaven docs).
-                                                            // Was 1 64; lowered because smooth scrolling (in
-                                                            // the .conf) adds fine sub-detent granularity, so
-                                                            // a gentler divisor gives the same total distance
-                                                            // without the slow-scroll "barely moves" floor.
-                                                            // TUNE: too fast on flash -> raise toward 1 16 /
-                                                            // 1 32 (host ignored hi-res); too slow -> lower.
+            <&zip_xy_scaler 1 32>,                          // scroll speed = 1/32 * cpi (ergohaven default).
+                                                            // 1 4 was too sensitive in practice (host doesn't
+                                                            // fully honor the hi-res multiplier), so back to
+                                                            // the documented baseline. Smooth scrolling (.conf)
+                                                            // still adds finer granularity than the old 1 64.
+                                                            // TUNE: too sensitive -> 1 48 / 1 64; too slow -> 1 16.
             <&zip_xy_to_scroll_mapper>;                     // X/Y motion -> scroll wheel
     };
 
