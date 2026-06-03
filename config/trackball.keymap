@@ -1,4 +1,8 @@
 #include "keys_ru.h"
+/* The trackball shield's trackball_layout.dtsi references &default_transform but never
+   defines it — by design each trackball keymap supplies its own (cf. upstream
+   config/trackball_v3.1.keymap). The matrix_transform.h include + default_transform
+   block below are therefore required, not a temporary workaround. */
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
