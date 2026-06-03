@@ -209,9 +209,9 @@
 
         nav {
             bindings = <
-&trans  &trans                     &trans            &trans               &trans                &trans                    &trans    &umlaut_u              &trans             &umlaut_o        &trans  &trans
-&trans  &ht_umlaut_a LEFT_SHIFT 0  &hml LCTRL RA(S)  &hml LEFT_ALT MINUS  &hml LEFT_GUI EQUAL   &trans                    &kp LEFT  &kp DOWN               &kp UP             &kp RIGHT        &trans  &trans
-&trans  &trans                     &kp LEFT_BRACE    &kp LEFT_BRACKET     &kp LEFT_PARENTHESIS  &trans                    &trans    &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RIGHT_BRACE  &trans  &trans
+&trans  &trans                     &trans            &trans               &trans                &trans                    &trans    &umlaut_u              &trans             &umlaut_o        &trans         &trans
+&trans  &ht_umlaut_a LEFT_SHIFT 0  &hml LCTRL RA(S)  &hml LEFT_ALT MINUS  &hml LEFT_GUI EQUAL   &trans                    &kp LEFT  &kp DOWN               &kp UP             &kp RIGHT        &kp PAGE_UP    &trans
+&trans  &trans                     &kp LEFT_BRACE    &kp LEFT_BRACKET     &kp LEFT_PARENTHESIS  &trans                    &trans    &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RIGHT_BRACE  &kp PAGE_DOWN  &trans
                                    &trans            &trans               &trans                &trans  &trans    &trans  &mo 3     &trans                 &trans             &trans
             >;
 
@@ -327,14 +327,17 @@
     scroller {
         layers = <5>;
         input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,   // natural scroll (invert Y)
-            <&zip_xy_scaler 1 32>,                          // scroll speed = 1/32 * cpi (ergohaven default).
-                                                            // 1 4 was too sensitive in practice (host doesn't
-                                                            // fully honor the hi-res multiplier), so back to
-                                                            // the documented baseline. Smooth scrolling (.conf)
-                                                            // still adds finer granularity than the old 1 64.
-                                                            // TUNE: too sensitive -> 1 48 / 1 64; too slow -> 1 16.
-            <&zip_xy_to_scroll_mapper>;                     // X/Y motion -> scroll wheel
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            // natural scroll (invert Y),
+            <&zip_xy_scaler 1 32>,
+            // scroll speed = 1/32 * cpi (ergohaven default).,
+            // 1 4 was too sensitive in practice (host doesn't,
+            // fully honor the hi-res multiplier), so back to,
+            // the documented baseline. Smooth scrolling (.conf),
+            // still adds finer granularity than the old 1 64.,
+            // TUNE: too sensitive -> 1 48 / 1 64; too slow -> 1 16.,
+            <&zip_xy_to_scroll_mapper>;
+                     // X/Y motion -> scroll wheel
     };
 
     sniper {
