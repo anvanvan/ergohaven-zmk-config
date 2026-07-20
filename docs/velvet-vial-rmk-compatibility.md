@@ -47,14 +47,13 @@ According to [DeepWiki analysis of RMK](https://deepwiki.com/HaoboGu/rmk), RMK d
 
 ### C. Ergohaven Vial Fork
 
-The user's context mentions "github.com/ergohaven/vial-gui" and a release 0.7.5-eh-2026-03-28. **This repository does not exist.** Ergohaven does not maintain a fork of vial-gui.
+`github.com/ergohaven/vial-gui` **does exist** — created 2024-12-11, `fork: true`, parent `vial-kb/vial-gui` (verified via `gh api repos/ergohaven/vial-gui`). The 0.7.5-eh-2026-03-28 release claim was not separately verified.
 
-What Ergohaven does maintain:
+What Ergohaven maintains:
+- **ergohaven/vial-gui:** fork of the upstream Vial GUI
 - **ergohaven/vial-qmk:** A QMK firmware fork with Vial features (for wired keyboards using QMK)
-- **ergohaven/rmk-eh:** RMK firmware for nRF52840 wireless keyboards
+- **ergohaven/rmk:** the active RMK firmware fork for nRF52840 wireless keyboards (fork of `HaoboGu/rmk`, created 2026-07-14); `ergohaven/rmk-eh` is the older repo and is now marked legacy, pointing to `ergohaven/rmk`
 - **vial.ergohaven.xyz:** A web-based Vial configurator (appears to be a hosting of upstream Vial Web)
-
-There is no custom Ergohaven Vial GUI with BLE support.
 
 ---
 
