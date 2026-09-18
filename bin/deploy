@@ -1,0 +1,233 @@
+#!/usr/bin/env zsh
+# Fetch the CI firmware built for HEAD into firmware/ (only the wanted
+# targets) and copy it onto the UF2 bootloader volume as soon as it mounts.
+#
+# Built against the AXI principles: stdout carries data (TOON-style
+# `key: value`), stderr carries progress, errors are data with a `fix:` line,
+# exit 0 = ok, 1 = failed, 2 = usage error. `bin/deploy --help` for usage.
+set -euo pipefail
+
+version=0.2.0
+suffix=-ergohaven-zmk.uf2
+default_target=velvet_v3_ui_right
+volumes=${UF2_VOLUMES:-/Volumes}
+self=bin/deploy
+
+fail() { print -- "error: $1"; print -- "fix: $2"; exit ${3:-1} }
+note() { print -u2 -- "$*" }
+
+help() {
+    case ${1:-} in
+    status) print -- "usage: $self [status]
+Show commit, its CI build, what firmware/ holds and whether a bootloader
+volume is mounted. Read-only, never waits.
+  $self
+  $self status" ;;
+    fetch) print -- "usage: $self fetch [target...]
+Download the build for HEAD and replace firmware/ with the given targets.
+Waits if the build is still running. Default target: $default_target
+  $self fetch
+  $self fetch velvet_v3_ui_left velvet_v3_ui_right" ;;
+    flash) print -- "usage: $self flash [target...] [--timeout <s>]
+fetch, then copy each target onto the UF2 bootloader volume once it mounts.
+  --timeout <s>   seconds to wait per target for the volume (default 120)
+  $self flash
+  $self flash velvet_v3_ui_left --timeout 300
+  $self flash velvet_v3_ui_right velvet_v3_ui_left   # flashed in this order" ;;
+    targets) print -- "usage: $self targets
+List every firmware target in the build for HEAD.
+  $self targets" ;;
+    *) print -- "usage: $self [status|fetch|flash|targets] [target...] [--timeout <s>]
+  status    commit, build, firmware/, bootloader volume (default)
+  fetch     replace firmware/ with the wanted targets of HEAD's build
+  flash     fetch + copy onto the bootloader volume when it mounts
+  targets   list all targets in the build
+  --help    per command: $self <command> --help
+  --version
+  $self
+  $self flash
+  $self fetch velvet_v3_ui_left" ;;
+    esac
+}
+
+cmd= timeout=120 want_help=0 targets=()
+while (( $# )); do
+    case $1 in
+    -h|--help) want_help=1 ;;
+    --version) print -- $version; exit 0 ;;
+    --timeout)
+        shift
+        [[ ${1:-} == <-> ]] || fail "--timeout needs whole seconds, got '${1:-}'" "$self flash --timeout 120" 2
+        timeout=$1 ;;
+    -*) fail "unknown flag $1" "$self --help" 2 ;;
+    *)
+        if [[ -z $cmd ]]; then
+            [[ $1 == (status|fetch|flash|targets) ]] || fail "unknown command $1" "$self flash $1   # if $1 is a target; else $self --help" 2
+            cmd=$1
+        else
+            targets+=$1
+        fi ;;
+    esac
+    shift
+done
+(( want_help )) && { help $cmd; exit 0 }
+: ${cmd:=status}
+[[ $cmd == (status|targets) && $#targets -gt 0 ]] && fail "$cmd takes no targets" "$self $cmd" 2
+(( $#targets )) || targets=($default_target)
+
+root=$(git -C ${0:A:h} rev-parse --show-toplevel)
+fw=$root/firmware
+# gh resolves a fork to its parent, so name the repo explicitly.
+repo=$(git -C $root remote get-url origin | sed -E 's#^(git@github\.com:|https://github\.com/)##; s#\.git$##')
+sha=$(git -C $root rev-parse HEAD)
+short=${sha[1,7]}
+dirty=false
+[[ -n $(git -C $root status --porcelain -- config build.yaml) ]] && dirty=true
+
+# Sets id, bstatus, conclusion; id stays empty when HEAD has no run.
+# $1 = lookups, 3 s apart — right after a push the run takes a moment to appear.
+find_build() {
+    local out parts
+    id= bstatus= conclusion=
+    for _ in {1..$1}; do
+        out=$(gh run list -R $repo --commit $sha -L 1 --json databaseId,status,conclusion \
+            -q '.[0] // empty | "\(.databaseId) \(.status) \(.conclusion)"' 2>&1) \
+            || fail "gh run list failed: ${out%%$'\n'*}" "gh auth status"
+        if [[ -n $out ]]; then
+            parts=(${(s: :)out})
+            id=$parts[1] bstatus=$parts[2] conclusion=${parts[3]:-}
+            return
+        fi
+        (( $1 > 1 )) && sleep 3
+    done
+}
+
+find_volume() {
+    local f
+    for f in $volumes/*/INFO_UF2.TXT(N); do print -r -- ${f:h}; return; done
+    return 1
+}
+
+held() {
+    local files=($fw/*$suffix(N:t))
+    files=(${files%$suffix})
+    print -- "firmware[$#files]: ${(j:,:)files}"
+}
+
+require_build() {
+    find_build 5
+    [[ -n $id ]] || fail "no CI build for $short on $repo" "git push, then $self $cmd"
+    if [[ $bstatus != completed ]]; then
+        note "… build $id for $short is $bstatus, waiting"
+        gh run watch $id -R $repo -i 10 >/dev/null 2>&1 || true
+        find_build 1
+    fi
+    [[ $conclusion == success ]] || fail "build $id for $short: ${conclusion:-$bstatus}" "gh run view $id -R $repo --log-failed"
+}
+
+# tmp and its trap live at top level: zsh fires an EXIT trap set inside a
+# function as soon as that function returns.
+tmp=$(mktemp -d)
+trap 'rm -rf $tmp' EXIT
+
+download() {
+    local out
+    out=$(gh run download $id -R $repo -n firmware -D $tmp 2>&1) \
+        || fail "download of build $id failed: ${out%%$'\n'*}" "gh run view $id -R $repo"
+    available=($tmp/*$suffix(N:t))
+    available=(${available%$suffix})
+}
+
+case $cmd in
+status)
+    find_build 1
+    print -- "commit: $short"
+    print -- "dirty: $dirty"
+    if [[ -n $id ]]; then
+        print -- "build: $id"
+        print -- "build_state: ${conclusion:-$bstatus}"
+    else
+        print -- "build: none (no CI run for $short on $repo)"
+    fi
+    held
+    held_commit=none
+    [[ -f $fw/.commit ]] && held_commit=$(<$fw/.commit)
+    print -- "firmware_commit: $held_commit"
+    print -- "bootloader: $(find_volume || print none)"
+    if [[ -z $id ]]; then
+        print -- "next[1]: git push"
+    elif [[ $held_commit != $short ]]; then
+        print -- "next[2]: $self flash,$self fetch <target>"
+    else
+        print -- "next[1]: $self flash"
+    fi
+    ;;
+
+targets)
+    require_build
+    download
+    print -- "build: $id"
+    print -- "targets[$#available]:"
+    print -l -- "  "${^available}
+    ;;
+
+fetch|flash)
+    [[ $dirty == true ]] && note "⚠ uncommitted changes in config/ are not part of this firmware"
+    require_build
+    download
+    for t in $targets; do
+        (( ${available[(Ie)$t]} )) && continue
+        print -- "error: no target $t in build $id"
+        print -- "available[$#available]: ${(j:,:)available[1,8]}$( (( $#available > 8 )) && print ,…)"
+        print -- "fix: $self targets"
+        exit 1
+    done
+
+    old=($fw/*(N))
+    rm -rf $fw
+    mkdir $fw
+    for t in $targets; do mv $tmp/$t$suffix $fw/; done
+    print -- $short > $fw/.commit
+
+    print -- "commit: $short"
+    print -- "build: $id"
+    held
+    print -- "replaced: $#old files"
+    if [[ $cmd == fetch ]]; then
+        print -- "next[1]: $self flash ${targets}"
+        exit 0
+    fi
+
+    rows=()
+    for t in $targets; do
+        note "→ put $t into the bootloader (BOOT key or double-tap reset), waiting ${timeout}s"
+        vol=
+        for _ in {1..$(( timeout * 2 ))}; do
+            vol=$(find_volume) && break
+            sleep 0.5
+        done
+        [[ -n $vol ]] || fail "no UF2 bootloader volume under $volumes within ${timeout}s ($t not flashed)" \
+            "enter the bootloader, then $self flash $t --timeout <seconds>"
+        note "  found $vol ($(grep -m1 '^Model:' $vol/INFO_UF2.TXT 2>/dev/null || print unknown board))"
+
+        # The board reboots the moment the last block lands, so cp often
+        # reports an I/O error on a successful flash — the vanishing volume
+        # is the proof.
+        copied=1
+        cp -X $fw/$t$suffix $vol/ 2>/dev/null || copied=0
+        for _ in {1..30}; do [[ -d $vol ]] || break; sleep 0.5; done
+
+        if [[ ! -d $vol ]]; then
+            rows+="  $t,$vol,$(stat -f %z $fw/$t$suffix),rebooted"
+        elif (( copied )); then
+            rows+="  $t,$vol,$(stat -f %z $fw/$t$suffix),still-mounted"
+            note "⚠ $t copied, but $vol is still mounted — check the board"
+        else
+            fail "copy of $t to $vol failed" "re-enter the bootloader, then $self flash $t"
+        fi
+    done
+    print -- "flashed[$#rows]{target,volume,bytes,board}:"
+    print -l -- $rows
+    print -- "hint: layers unchanged after flashing → ZMK Studio, Restore Stock Settings"
+    ;;
+esac
